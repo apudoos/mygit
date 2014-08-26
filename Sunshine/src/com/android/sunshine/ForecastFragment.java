@@ -16,9 +16,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.Preference;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -35,6 +39,7 @@ import android.widget.Toast;
 public class ForecastFragment extends Fragment {
 	
 	ArrayAdapter<String> mForecastAdapter;
+	List<String> weekForecast;
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -45,11 +50,18 @@ public class ForecastFragment extends Fragment {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int id = item.getItemId();
 		if (id == R.id.action_refresh) {
-			FetchWeatherTask weatherTask = new FetchWeatherTask();
-			weatherTask.execute();
+			updateWeather();
 			return true;
 		}
+
 		return super.onOptionsItemSelected(item);
+	}
+
+	private void updateWeather() {
+		FetchWeatherTask weatherTask = new FetchWeatherTask();
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+		String location = prefs.getString(getString(R.string.pref_edit), "28117");
+		weatherTask.execute(location);
 	} 
 
 	@Override
@@ -57,6 +69,11 @@ public class ForecastFragment extends Fragment {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
+	}
+	
+	public void onStart() {
+		super.onStart();
+		updateWeather();
 	}
 
 	public ForecastFragment() {
@@ -69,20 +86,8 @@ public class ForecastFragment extends Fragment {
 				false);
 		
 		
-		
-		String [] forecastArray = {
-				"Today - Sunny - 88/63",
-				"Tomorrow - Sunny - 88/63",
-				"Today - Sunny - 88/63",
-				"Today - Sunny - 88/63", 
-				"Today - Sunny - 88/63",
-				"Today - Sunny - 88/63",
-				"Sunday - Sunny - 88/63",
-		};
-		
-		List<String> weekForecast = new ArrayList<String> (Arrays.asList(forecastArray));
-		
-		mForecastAdapter = new ArrayAdapter<String>(getActivity(), R.layout.list_item_forecast, R.id.list_item_forecast_textview, weekForecast);
+			
+		mForecastAdapter = new ArrayAdapter<String>(getActivity(), R.layout.list_item_forecast, R.id.list_item_forecast_textview, new ArrayList<String>());
 		
 		ListView listView = (ListView) rootView.findViewById(R.id.listview_forecast);
 		
@@ -96,9 +101,13 @@ public class ForecastFragment extends Fragment {
 				// TODO Auto-generated method stub
 				Log.v("This class", "the id " + id + "position " + position);
 				String forecast = mForecastAdapter.getItem(position);
-				
+							
 				Toast.makeText(getActivity(),  forecast, Toast.LENGTH_LONG).show();
 				
+				Toast.makeText(getActivity(),  weekForecast.get(position).toString(), Toast.LENGTH_LONG).show();
+				
+				Intent intent = new Intent(getActivity(), DetailActivity.class).putExtra(Intent.EXTRA_TEXT, forecast);
+				startActivity(intent);
 			}
 		
 		
