@@ -8,5 +8,12 @@
         android:summary="@string/pref_edit_summ"
         android:defaultValue="true" />
         
+    <ListPreference 
+        android:dependency="pref_edit"
+        android:key="pref_temp"
+        android:title="@string/pref_temp"
+        android:dialogTitle="@string/pref_temp"
+        android:entries="@array/pref_temp_entries"
+        android:entryValues="@array/pref_temp_entries_values" />
     
 </PreferenceScreen>
