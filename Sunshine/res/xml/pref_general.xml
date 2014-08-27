@@ -2,7 +2,7 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
  
-    <EditPreference 
+    <EditTextPreference 
         android:key="pref_edit"
         android:title="@string/pref_edit"
         android:summary="@string/pref_edit_summ"
