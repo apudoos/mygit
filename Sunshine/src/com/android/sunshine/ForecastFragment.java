@@ -8,7 +8,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -21,7 +20,6 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -60,7 +58,7 @@ public class ForecastFragment extends Fragment {
 	private void updateWeather() {
 		FetchWeatherTask weatherTask = new FetchWeatherTask();
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-		String location = prefs.getString(getString(R.string.pref_edit), "28117");
+		String location = prefs.getString(getString(R.string.pref_location_key), getString(R.string.pref_location_default));
 		weatherTask.execute(location);
 	} 
 
@@ -296,14 +294,15 @@ public class ForecastFragment extends Fragment {
 			
 			return null;
 		}
-	}
 	
-	protected void onPostExecute(String [] results) {
-		if (results != null) {
-			 mForecastAdapter.clear();
-			 for (String dayForecasterstr : results) {
-				 mForecastAdapter.add(dayForecasterstr);
-			 }
+		@Override
+		protected void onPostExecute(String[] results) {
+			if (results != null) {
+				mForecastAdapter.clear();
+				for (String dayForecasterstr : results) {
+					mForecastAdapter.add(dayForecasterstr);
+				}
+			}
 		}
 	}
 	

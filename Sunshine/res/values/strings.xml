@@ -7,7 +7,13 @@
     <string name="action_refresh">Refresh</string>
     <string name="title_activity_detail">DetailActivity</string>
     <string name="title_activity_settings">SettingsActivity</string>
-	<string name="pref_edit">Edit Zip </string>
-	<string name="pref_edit_summ">Summary for edit preferences</string>
+	
+	<string name="pref_location_key" translatable="false">location</string>
+	<string name="pref_location_label">Location</string>
+	<string name="pref_location_default" translatable="false">28117</string>
+	
+	<string name="pref_units_key">units</string>
+	<string name="pref_units_label">Units</string>
+	<string name="pref_units_default">metric</string>
     
 </resources>
