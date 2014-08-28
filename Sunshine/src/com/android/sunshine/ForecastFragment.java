@@ -51,7 +51,7 @@ public class ForecastFragment extends Fragment {
 			updateWeather();
 			return true;
 		}
-
+		
 		return super.onOptionsItemSelected(item);
 	}
 
@@ -97,7 +97,7 @@ public class ForecastFragment extends Fragment {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// TODO Auto-generated method stub
-				Log.v("This class", "the id " + id + "position " + position);
+				Log.d("This class", "the id " + id + "position " + position);
 				String forecast = mForecastAdapter.getItem(position);
 							
 				Toast.makeText(getActivity(),  forecast, Toast.LENGTH_LONG).show();
@@ -134,6 +134,17 @@ public class ForecastFragment extends Fragment {
 		 */
 		private String formatHighLows(double high, double low) {
 		    // For presentation, assume the user doesn't care about tenths of a degree.
+			SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+			
+			String unitType = sharedPrefs.getString(getString(R.string.pref_units_key), getString(R.string.pref_units_default));
+			
+			if (unitType.equals(getString(R.string.pref_units_imperial))) {
+				high=(high *1.8) + 32;
+				low=(low*1.8) + 32;
+			} else if (!unitType.equals(getString(R.string.pref_location_default))) {
+				Log.d(LOG_TAG, "Unit type not found: " + unitType);
+			}
+			
 		    long roundedHigh = Math.round(high);
 		    long roundedLow = Math.round(low);
 		 
