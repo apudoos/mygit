@@ -59,7 +59,7 @@ public class DetailActivity extends ActionBarActivity {
 		private static final String LOG_TAG = DetailFragment.class.getName();
 		private static final String FORECAST_SHARE_HASHTAG = " #SunshineApp";
 		private String forecastStr;
-		private ShareActionProvider mShareActionProvider;
+		//private ShareActionProvider mShareActionProvider;
 		
 
 		public DetailFragment() {
@@ -69,11 +69,11 @@ public class DetailActivity extends ActionBarActivity {
 		@Override
 		public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 			
-			inflater.inflate(R.menu.detail, menu);
+			inflater.inflate(R.menu.detailfragment, menu);
 			
-			MenuItem menuItem = menu.findItem(R.id.menu_item_share);
+			MenuItem menuItem = menu.findItem(R.id.action_share);
 			
-			mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(menuItem);
+			ShareActionProvider mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(menuItem);
 			
 			// TODO Test this one
 			//mShareActionProvider = (ShareActionProvider) menuItem.getActionProvider();

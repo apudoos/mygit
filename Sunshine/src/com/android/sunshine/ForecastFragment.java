@@ -96,14 +96,10 @@ public class ForecastFragment extends Fragment {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				// TODO Auto-generated method stub
+				 
 				Log.d("This class", "the id " + id + "position " + position);
 				String forecast = mForecastAdapter.getItem(position);
-							
-				Toast.makeText(getActivity(),  forecast, Toast.LENGTH_LONG).show();
-				
-				Toast.makeText(getActivity(),  weekForecast.get(position).toString(), Toast.LENGTH_LONG).show();
-				
+
 				Intent intent = new Intent(getActivity(), DetailActivity.class).putExtra(Intent.EXTRA_TEXT, forecast);
 				startActivity(intent);
 			}
@@ -141,7 +137,7 @@ public class ForecastFragment extends Fragment {
 			if (unitType.equals(getString(R.string.pref_units_imperial))) {
 				high=(high *1.8) + 32;
 				low=(low*1.8) + 32;
-			} else if (!unitType.equals(getString(R.string.pref_location_default))) {
+			} else if (!unitType.equals(getString(R.string.pref_units_default))) {
 				Log.d(LOG_TAG, "Unit type not found: " + unitType);
 			}
 			
@@ -174,7 +170,7 @@ public class ForecastFragment extends Fragment {
 		    JSONObject forecastJson = new JSONObject(forecastJsonStr);
 		    JSONArray weatherArray = forecastJson.getJSONArray(OWM_LIST);
 		 
-		    String[] resultStrs = new String[numDays];
+		    String[] resultStrs = new String[weatherArray.length()];
 		    for(int i = 0; i < weatherArray.length(); i++) {
 		        // For now, using the format "Day, description, hi/low"
 		        String day;
@@ -249,7 +245,7 @@ public class ForecastFragment extends Fragment {
 			    	
 				//URL url = new URL("http://api.openweathermap.org/data/2.5/forecast/daily?q=94043&mode=json&units=metric&cnt=7");
 			    URL url = new URL(builder.toString());
-			    Log.v(LOG_TAG, "Built URI: " + builder.toString());
+			    Log.d(LOG_TAG, "Built URI: " + builder.toString());
 			 
 			    // Create the request to OpenWeatherMap, and open the connection
 			    urlConnection = (HttpURLConnection) url.openConnection();
