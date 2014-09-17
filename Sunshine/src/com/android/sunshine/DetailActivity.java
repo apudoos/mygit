@@ -1,4 +1,4 @@
- package com.android.sunshine;
+package com.android.sunshine;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -69,9 +69,9 @@ public class DetailActivity extends ActionBarActivity {
 		@Override
 		public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 			
-			inflater.inflate(R.menu.detailfragment, menu);
+			inflater.inflate(R.menu.forecastfragment, menu);
 			
-			MenuItem menuItem = menu.findItem(R.id.action_share);
+			MenuItem menuItem = menu.findItem(R.id.action_refresh);
 			
 			ShareActionProvider mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(menuItem);
 			
