@@ -2,6 +2,9 @@ package com.example.tipcalc;
 
 import java.text.NumberFormat;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
@@ -63,6 +66,8 @@ public class MainActivity extends ActionBarActivity {
 		private TextView totalTextView;
 		
 		private float tipPercent = .15f;
+		private SharedPreferences savedValues;
+		private String billAmountString;
 
 		public PlaceholderFragment() {
 		}
@@ -72,6 +77,9 @@ public class MainActivity extends ActionBarActivity {
 				Bundle savedInstanceState) {
 			View rootView = inflater.inflate(R.layout.fragment_main, container,
 					false);
+			
+			getActivity();
+			savedValues = getActivity().getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
 			
 			billAmountEditText = (EditText) rootView.findViewById(R.id.billAmountEditText);
 			percentTextView = (TextView) rootView.findViewById(R.id.percentTextView);
@@ -90,13 +98,31 @@ public class MainActivity extends ActionBarActivity {
 		}
 
 		@Override
+		public void onPause() {
+			Editor editor = savedValues.edit();
+			editor.putString("billAmountString", billAmountString);
+			editor.putFloat("tipPercent", tipPercent);
+			editor.commit();
+			
+			super.onPause();
+		}
+
+		@Override
+		public void onResume() {
+			
+			billAmountString = savedValues.getString("billAmountString", "");
+			tipPercent = savedValues.getFloat("tipPercent", 0.15f);
+			super.onResume();
+		}
+
+		@Override
 		public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
 			calculateAndDisplay();
 			return false;
 		}
 
 		private void calculateAndDisplay() {
-			String billAmountString = billAmountEditText.getText().toString();
+			billAmountString = billAmountEditText.getText().toString();
 			float billAmount;
 			if (billAmountString.equals("")) {
 				billAmount = 0;

@@ -356,6 +356,7 @@ int string bill_amount_label 0x7f0a0010
 int string decrease 0x7f0a0015
 int string hello_world 0x7f0a000e
 int string increase 0x7f0a0014
+int string preference_file_key 0x7f0a001a
 int string tip_amount 0x7f0a0017
 int string tip_amount_label 0x7f0a0016
 int string tip_percent 0x7f0a0013
