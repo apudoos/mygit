@@ -82,6 +82,7 @@ public class MainActivity extends ActionBarActivity {
 			
 			
 			billAmountEditText.setOnEditorActionListener(this);
+			
 			percentUpButton.setOnClickListener(this);
 			percentDownButton.setOnClickListener(this);		
 			
