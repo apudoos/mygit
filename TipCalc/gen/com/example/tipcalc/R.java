@@ -16,6 +16,9 @@ public final class R {
         public static final int abc_slide_out_bottom=0x7f040004;
         public static final int abc_slide_out_top=0x7f040005;
     }
+    public static final class array {
+        public static final int splittip=0x7f0c0000;
+    }
     public static final class attr {
         /**  Custom divider drawable to use for elements in the action bar. 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
@@ -1091,12 +1094,13 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f050016;
         public static final int action_menu_presenter=0x7f050017;
         public static final int action_mode_close_button=0x7f050024;
-        public static final int action_settings=0x7f050047;
+        public static final int action_settings=0x7f050059;
         public static final int activity_chooser_view_content=0x7f050025;
         public static final int always=0x7f05000b;
         public static final int beginning=0x7f050011;
-        public static final int billAmountEditText=0x7f05003e;
-        public static final int billAmountLabel=0x7f05003d;
+        public static final int billAmountEditText=0x7f05003f;
+        public static final int billAmountLabel=0x7f05003e;
+        public static final int button1=0x7f050058;
         public static final int checkbox=0x7f05002d;
         public static final int collapseActionView=0x7f05000d;
         public static final int container=0x7f05003c;
@@ -1119,13 +1123,19 @@ containing a value of this type.
         public static final int never=0x7f050009;
         public static final int none=0x7f050010;
         public static final int normal=0x7f050000;
-        public static final int percentDownButton=0x7f050041;
-        public static final int percentLabel=0x7f05003f;
-        public static final int percentTextView=0x7f050040;
-        public static final int percentUpButton=0x7f050042;
+        public static final int perPersonLabel=0x7f050055;
+        public static final int perPersonText=0x7f050056;
+        public static final int percentDownButton=0x7f050043;
+        public static final int percentLabel=0x7f050041;
+        public static final int percentTextView=0x7f050042;
+        public static final int percentUpButton=0x7f050044;
         public static final int progress_circular=0x7f050018;
         public static final int progress_horizontal=0x7f050019;
         public static final int radio=0x7f05002f;
+        public static final int radio0=0x7f05004e;
+        public static final int radio1=0x7f05004f;
+        public static final int radio2=0x7f050050;
+        public static final int radioGroup1=0x7f05004d;
         public static final int search_badge=0x7f050032;
         public static final int search_bar=0x7f050031;
         public static final int search_button=0x7f050033;
@@ -1140,15 +1150,26 @@ containing a value of this type.
         public static final int showCustom=0x7f050007;
         public static final int showHome=0x7f050004;
         public static final int showTitle=0x7f050006;
+        public static final int spinner1=0x7f050053;
         public static final int split_action_bar=0x7f05001e;
         public static final int submit_area=0x7f050039;
         public static final int tabMode=0x7f050002;
-        public static final int tipLabel=0x7f050043;
-        public static final int tipTextView=0x7f050044;
+        public static final int tableRow1=0x7f05003d;
+        public static final int tableRow2=0x7f050040;
+        public static final int tableRow3=0x7f050045;
+        public static final int tableRow4=0x7f050048;
+        public static final int tableRow5=0x7f05004b;
+        public static final int tableRow6=0x7f050051;
+        public static final int tableRow7=0x7f050054;
+        public static final int tableRow8=0x7f050057;
+        public static final int textView1=0x7f05004c;
+        public static final int textView2=0x7f050052;
+        public static final int tipLabel=0x7f050046;
+        public static final int tipTextView=0x7f050047;
         public static final int title=0x7f05002b;
         public static final int top_action_bar=0x7f050020;
-        public static final int totalLabel=0x7f050045;
-        public static final int totalTextView=0x7f050046;
+        public static final int totalLabel=0x7f050049;
+        public static final int totalTextView=0x7f05004a;
         public static final int up=0x7f050021;
         public static final int useLogo=0x7f050003;
         public static final int withText=0x7f05000c;
@@ -1208,7 +1229,7 @@ containing a value of this type.
         public static final int support_simple_spinner_dropdown_item=0x7f03001a;
     }
     public static final class menu {
-        public static final int main=0x7f0c0000;
+        public static final int main=0x7f0d0000;
     }
     public static final class string {
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
@@ -1253,16 +1274,23 @@ containing a value of this type.
         public static final int abc_shareactionprovider_share_with_application=0x7f0a000b;
         public static final int action_settings=0x7f0a000f;
         public static final int app_name=0x7f0a000d;
+        public static final int apply=0x7f0a0021;
         public static final int bill_amount=0x7f0a0011;
         public static final int bill_amount_label=0x7f0a0010;
         public static final int decrease=0x7f0a0015;
         public static final int hello_world=0x7f0a000e;
         public static final int increase=0x7f0a0014;
+        public static final int none=0x7f0a001c;
+        public static final int perPerson=0x7f0a0020;
         public static final int preference_file_key=0x7f0a001a;
+        public static final int rounding=0x7f0a001b;
+        public static final int splitBill=0x7f0a001f;
+        public static final int tip=0x7f0a001d;
         public static final int tip_amount=0x7f0a0017;
         public static final int tip_amount_label=0x7f0a0016;
         public static final int tip_percent=0x7f0a0013;
         public static final int tip_percent_label=0x7f0a0012;
+        public static final int total=0x7f0a001e;
         public static final int total_amount=0x7f0a0019;
         public static final int total_amount_label=0x7f0a0018;
     }

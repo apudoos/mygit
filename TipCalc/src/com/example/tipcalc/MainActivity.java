@@ -15,8 +15,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
@@ -64,10 +68,18 @@ public class MainActivity extends ActionBarActivity {
 		private Button percentDownButton;
 		private TextView tipTextView;
 		private TextView totalTextView;
+		private TextView perPersonLabelView;
+		private TextView perPersonAmtView;
+		private Spinner spinner;
+		private RadioButton noneRadio;
+		private RadioButton tipRadio;
+		private RadioButton totalRadio;
 		
 		private float tipPercent = .15f;
 		private SharedPreferences savedValues;
 		private String billAmountString;
+		private Button applyButton;
+		private boolean applyButtonClicked = false;
 
 		public PlaceholderFragment() {
 		}
@@ -87,12 +99,23 @@ public class MainActivity extends ActionBarActivity {
 			percentDownButton = (Button) rootView.findViewById(R.id.percentDownButton);
 			tipTextView = (TextView) rootView.findViewById(R.id.tipTextView);
 			totalTextView = (TextView) rootView.findViewById(R.id.totalTextView);
+			noneRadio = (RadioButton) rootView.findViewById(R.id.radio0);
+			tipRadio = (RadioButton) rootView.findViewById(R.id.radio1);
+			totalRadio = (RadioButton) rootView.findViewById(R.id.radio2);
+			applyButton = (Button) rootView.findViewById(R.id.button1);
+			perPersonLabelView = (TextView) rootView.findViewById(R.id.perPersonLabel);
+			perPersonAmtView = (TextView) rootView.findViewById(R.id.perPersonText);
 			
+			spinner = (Spinner) rootView.findViewById(R.id.spinner1);
+			ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.splittip, android.R.layout.simple_spinner_item);
+			adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+			spinner.setAdapter(adapter);
 			
 			billAmountEditText.setOnEditorActionListener(this);
 			
 			percentUpButton.setOnClickListener(this);
 			percentDownButton.setOnClickListener(this);		
+			applyButton.setOnClickListener(this);
 			
 			return rootView;
 		}
@@ -117,7 +140,11 @@ public class MainActivity extends ActionBarActivity {
 
 		@Override
 		public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-			calculateAndDisplay();
+			if (actionId == EditorInfo.IME_ACTION_DONE) {
+				calculateAndDisplay();
+			}
+			
+			
 			return false;
 		}
 
@@ -133,12 +160,45 @@ public class MainActivity extends ActionBarActivity {
 			float tipAmount = billAmount * tipPercent;
 			float totalAmount = billAmount + tipAmount;
 			
+			if (applyButtonClicked) {
+				if (tipRadio.isChecked()) {
+					tipAmount = StrictMath.round(billAmount * tipPercent);
+					totalAmount = billAmount + tipAmount;
+					tipPercent = tipAmount / billAmount;
+				
+				} else if (totalRadio.isChecked()) {
+				
+					float tipNotRounded = billAmount * tipPercent;
+					totalAmount = StrictMath.round(billAmount + tipNotRounded);
+					tipAmount = totalAmount - billAmount;
+					tipPercent = tipAmount / billAmount;
+				}
+			}
+			
 			NumberFormat currency = NumberFormat.getCurrencyInstance();
 			tipTextView.setText(currency.format(tipAmount));
 			totalTextView.setText(currency.format(totalAmount));
 			
 			NumberFormat percent = NumberFormat.getPercentInstance();
 			percentTextView.setText(percent.format(tipPercent));
+			
+			
+			int position = spinner.getSelectedItemPosition();
+			
+			if (position == 0) {
+				perPersonLabelView.setVisibility(View.GONE);
+				perPersonAmtView.setVisibility(View.GONE);
+			} else {
+				
+				Float perperson = totalAmount/(position + 1);
+				perPersonLabelView.setVisibility(View.VISIBLE);
+				perPersonAmtView.setVisibility(View.VISIBLE);
+				perPersonAmtView.setText(currency.format(perperson));
+
+				
+			}
+			
+			
 			
 		}
 
@@ -147,14 +207,25 @@ public class MainActivity extends ActionBarActivity {
 			
 			switch (v.getId()) {
 			case R.id.percentDownButton:
+				applyButtonClicked = false;
 				tipPercent = tipPercent - .01f;
 				calculateAndDisplay();
+				noneRadio.setChecked(true);
+				
 				break;
 				
 			case R.id.percentUpButton:
+				applyButtonClicked = false;
 				tipPercent = tipPercent + .01f;
 				calculateAndDisplay();
+				noneRadio.setChecked(true);
 				break;
+				
+			case R.id.button1:
+				applyButtonClicked = true;
+				calculateAndDisplay();
+				break;
+
 			
 			}
 			

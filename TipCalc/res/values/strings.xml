@@ -15,6 +15,19 @@
     <string name="total_amount_label">Total</string>
     <string name="total_amount">$0.000</string>
     <string name="preference_file_key">SavedValues</string>
+    <string name="rounding">Rounding</string>
+    <string name="none">None</string>
+    <string name="tip">Tip</string>
+    <string name="total">Total</string>
+    <string name="splitBill">Split Bill?</string>
+    <string name="perPerson">Per Person</string>
+    <string name="apply">Apply</string>
+    <string-array name="splittip">
+        <item>None</item>
+        <item>2 Ways</item>
+        <item>3 Ways</item>
+        <item>4 Ways</item>
+    </string-array>
     
 
 </resources>
